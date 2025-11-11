@@ -1,4 +1,3 @@
-//IMPORTACION DE LA BIBLIOTECA Y CREACION DE CONSTANTES
 require('dotenv').config();
 
 const express = require('express');
@@ -9,17 +8,23 @@ const MONGO_URL = process.env.MONGO_URL;
 
 app.use(express.json());
 
-//CONEXION CON LA BD
+// Validar variable de entorno
+if (!MONGO_URL) {
+  console.error('Error: MONGO_URL no está definido en .env');
+  process.exit(1);
+}
+
+// CONEXIÓN CON LA BD
 mongoose.connect(MONGO_URL)
     .then(() => {
-        console.log('Conexion exitosa a MongoDB Atlas');
+        console.log('Conexión exitosa a MongoDB Atlas');
     })
     .catch((error) => {
-        console.error('Error de conexion', error.message);
+        console.error('Error de conexión', error.message);
         process.exit(1);
     });
 
-//RUTAS 
+// RUTAS (nombres de archivo correctos)
 const juegoroutes = require('./routes/juegoroute');
 app.use('/api/juegos', juegoroutes);
 
@@ -27,5 +32,5 @@ const resenasroutes = require('./routes/resenaroute');
 app.use('/api/resenas', resenasroutes);
 
 app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`)
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
