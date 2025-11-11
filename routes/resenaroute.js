@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const juegocontroller = require('../controllers/juegocontroller');
+const resenacontroller = require('../controllers/resenacontroller');
 
-// Rutas CRUD para Juegos (Endpoint: /api/juegos
-router.post('/', juegocontroller.crearJuego);
-router.get('/', juegocontroller.obtenerJuegos);
-router.get('/:id', juegocontroller.obtenerJuegoPorId);
-router.put('/:id', juegocontroller.actualizarJuego);
-router.delete('/:id', juegocontroller.eliminarJuego);
+// Rutas CRUD para Reseñas
+router.post('/', resenacontroller.crearResena);
+router.get('/', resenacontroller.obtenerResenas);
+router.get('/:id', resenacontroller.obtenerResenaPorId);
+router.put('/:id', resenacontroller.actualizarResena);
+router.delete('/:id', resenacontroller.eliminarResena);
 
 module.exports = router;
